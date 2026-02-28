@@ -17,6 +17,7 @@
   - [x] Create main layout with sidebar navigation
   - [x] Create header with login status
   - [x] Update App.tsx with routing
+  - [x] Fix sidebar text visibility issue
 - [x] Step 4: Core Pages Implementation
   - [x] Dashboard page (overview, countdown timers, risk score)
   - [x] Profile page (user profile setup)
@@ -25,11 +26,15 @@
   - [x] Financial page (expense tracking)
   - [x] Career page (career timeline)
   - [x] Admin page (user management)
+  - [x] AI Assistant page (chat interface with streaming)
 - [x] Step 5: AI Features
   - [x] Implement risk score calculation
   - [x] Implement AI recommendation engine
   - [x] Auto-generate academic deadlines
   - [x] Auto-generate career timelines
+  - [x] Create AI chat Edge Function with Medo API
+  - [x] Deploy Edge Function
+  - [x] Register INTEGRATIONS_API_KEY secret
 - [x] Step 6: Validation & Polish
   - [x] Run lint and fix issues
   - [x] All features implemented
@@ -41,5 +46,9 @@
 - First user becomes admin automatically
 - All deadlines auto-generated from semester start date
 - Risk score calculated based on pending tasks, missed deadlines, and deadline density
+- Fixed sidebar text visibility by adding explicit text-sidebar-foreground color
+- AI Assistant uses Medo API (Gemini 2.5 Flash) with streaming responses
+- Edge Function handles SSE streaming and returns complete response
+- Using react-markdown for rendering AI responses
 - All lint errors fixed successfully
 - Application ready for use

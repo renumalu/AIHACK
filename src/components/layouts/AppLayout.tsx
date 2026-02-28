@@ -12,6 +12,7 @@ import {
   Menu,
   LogOut,
   Shield,
+  Sparkles,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -22,6 +23,7 @@ const navigation = [
   { name: 'ANALYTICS', href: '/analytics', icon: BarChart3 },
   { name: 'FINANCIAL', href: '/financial', icon: Wallet },
   { name: 'CAREER', href: '/career', icon: Briefcase },
+  { name: 'AI ASSISTANT', href: '/ai-assistant', icon: Sparkles },
 ];
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
@@ -43,7 +45,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           className={`flex items-center gap-3 px-4 py-3 text-sm font-medium uppercase transition-colors pixel-border-thin ${
             isActive
               ? 'bg-primary text-primary-foreground pixel-shadow-sm'
-              : 'hover:bg-accent hover:text-accent-foreground'
+              : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
           }`}
           onClick={() => setMobileMenuOpen(false)}
         >
@@ -61,7 +63,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           className={`flex items-center gap-3 px-4 py-3 text-sm font-medium uppercase transition-colors pixel-border-thin ${
             location.pathname === '/admin'
               ? 'bg-destructive text-destructive-foreground pixel-shadow-sm'
-              : 'hover:bg-destructive/10'
+              : 'text-sidebar-foreground hover:bg-destructive/10'
           }`}
           onClick={() => setMobileMenuOpen(false)}
         >

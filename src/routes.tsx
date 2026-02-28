@@ -5,6 +5,7 @@ import DeadlinesPage from './pages/DeadlinesPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import FinancialPage from './pages/FinancialPage';
 import CareerPage from './pages/CareerPage';
+import AIAssistantPage from './pages/AIAssistantPage';
 import AdminPage from './pages/AdminPage';
 import type { ReactNode } from 'react';
 
@@ -51,6 +52,11 @@ const routes: RouteConfig[] = [
     name: 'Career',
     path: '/career',
     element: <CareerPage />,
+  },
+  {
+    name: 'AI Assistant',
+    path: '/ai-assistant',
+    element: <AIAssistantPage />,
   },
   {
     name: 'Admin',
