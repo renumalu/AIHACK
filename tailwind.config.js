@@ -23,6 +23,9 @@ export default {
             }
         },
         extend: {
+            fontFamily: {
+                'han-chan-dian-zheng-ti-16px': ['HanChanDianZhengTi_16px', 'sans-serif'],
+            },
             colors: {
                 border: 'hsl(var(--border))',
                 borderColor: {

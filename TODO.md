@@ -1,0 +1,45 @@
+# Task: Build Deadline Radar AI - Predictive Student Life Intelligence System
+
+## Plan
+- [x] Step 1: Design System & Database Setup
+  - [x] Create pixel art aesthetic design system with NES palette colors
+  - [x] Register pixel font in index.css and tailwind.config
+  - [x] Initialize Supabase
+  - [x] Create database schema (profiles, deadlines, categories, expenses, risk_scores, recommendations, career_timelines)
+  - [x] Set up RLS policies and helper functions
+- [x] Step 2: Authentication & Core Infrastructure
+  - [x] Update AuthContext for username-based login
+  - [x] Update RouteGuard for public routes
+  - [x] Create login/register page
+  - [x] Create type definitions
+  - [x] Create database API layer
+- [x] Step 3: Layout & Navigation
+  - [x] Create main layout with sidebar navigation
+  - [x] Create header with login status
+  - [x] Update App.tsx with routing
+- [x] Step 4: Core Pages Implementation
+  - [x] Dashboard page (overview, countdown timers, risk score)
+  - [x] Profile page (user profile setup)
+  - [x] Deadlines page (deadline management)
+  - [x] Analytics page (charts and visualizations)
+  - [x] Financial page (expense tracking)
+  - [x] Career page (career timeline)
+  - [x] Admin page (user management)
+- [x] Step 5: AI Features
+  - [x] Implement risk score calculation
+  - [x] Implement AI recommendation engine
+  - [x] Auto-generate academic deadlines
+  - [x] Auto-generate career timelines
+- [x] Step 6: Validation & Polish
+  - [x] Run lint and fix issues
+  - [x] All features implemented
+
+## Notes
+- Using NES palette colors for retro gaming aesthetic
+- Pixel font: HanChanDianZhengTi_16px
+- Username-based login (no email verification)
+- First user becomes admin automatically
+- All deadlines auto-generated from semester start date
+- Risk score calculated based on pending tasks, missed deadlines, and deadline density
+- All lint errors fixed successfully
+- Application ready for use
