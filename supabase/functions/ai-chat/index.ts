@@ -29,6 +29,8 @@ Deno.serve(async (req) => {
 
     const apiUrl = 'https://app-9xp25u4ctp1d-api-VaOwP8E7dJqa.gateway.appmedo.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse';
 
+    console.log('Calling AI API with contents:', JSON.stringify(contents));
+
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -52,28 +54,74 @@ Deno.serve(async (req) => {
       throw new Error('No response body');
     }
 
+    let buffer = '';
+
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
 
-      const chunk = decoder.decode(value, { stream: true });
-      const lines = chunk.split('\n');
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      
+      buffer = lines.pop() || '';
 
       for (const line of lines) {
-        if (line.startsWith('data: ')) {
+        const trimmedLine = line.trim();
+        
+        if (trimmedLine.startsWith('data: ')) {
           try {
-            const jsonStr = line.slice(6);
-            if (jsonStr.trim() === '[DONE]') continue;
+            const jsonStr = trimmedLine.slice(6).trim();
+            
+            if (jsonStr === '[DONE]' || jsonStr === '') {
+              continue;
+            }
             
             const data = JSON.parse(jsonStr);
-            if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
-              fullResponse += data.candidates[0].content.parts[0].text;
+            
+            if (data.candidates && Array.isArray(data.candidates)) {
+              for (const candidate of data.candidates) {
+                if (candidate.content?.parts && Array.isArray(candidate.content.parts)) {
+                  for (const part of candidate.content.parts) {
+                    if (part.text) {
+                      fullResponse += part.text;
+                    }
+                  }
+                }
+              }
             }
           } catch (e) {
-            console.error('Error parsing SSE data:', e);
+            console.error('Error parsing SSE line:', trimmedLine, e);
           }
         }
       }
+    }
+
+    if (buffer.trim().startsWith('data: ')) {
+      try {
+        const jsonStr = buffer.trim().slice(6).trim();
+        if (jsonStr !== '[DONE]' && jsonStr !== '') {
+          const data = JSON.parse(jsonStr);
+          if (data.candidates && Array.isArray(data.candidates)) {
+            for (const candidate of data.candidates) {
+              if (candidate.content?.parts && Array.isArray(candidate.content.parts)) {
+                for (const part of candidate.content.parts) {
+                  if (part.text) {
+                    fullResponse += part.text;
+                  }
+                }
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Error parsing final buffer:', buffer, e);
+      }
+    }
+
+    console.log('Full response length:', fullResponse.length);
+
+    if (!fullResponse) {
+      throw new Error('No response received from AI');
     }
 
     return new Response(

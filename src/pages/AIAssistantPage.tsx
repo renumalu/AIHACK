@@ -41,10 +41,32 @@ export default function AIAssistantPage() {
     try {
       abortControllerRef.current = new AbortController();
 
-      const conversationHistory = messages.map(msg => ({
-        role: msg.role,
-        parts: [{ text: msg.content }],
-      }));
+      const conversationHistory: Array<{
+        role: string;
+        parts: Array<{ text: string }>;
+      }> = [];
+      
+      if (messages.length === 0) {
+        conversationHistory.push({
+          role: 'user',
+          parts: [{
+            text: 'You are a helpful AI assistant for college students. You help with deadline management, study tips, career advice, and academic planning. Provide clear, accurate, and helpful responses. Do not use code comments or special characters like double slashes in your responses. Always give complete and correct answers.'
+          }],
+        });
+        conversationHistory.push({
+          role: 'model',
+          parts: [{
+            text: 'I understand. I will provide clear, helpful responses for students without using code comments or special characters. I am here to help with deadlines, studies, and career planning.'
+          }],
+        });
+      }
+
+      messages.forEach(msg => {
+        conversationHistory.push({
+          role: msg.role,
+          parts: [{ text: msg.content }],
+        });
+      });
 
       conversationHistory.push({
         role: 'user',
@@ -65,10 +87,13 @@ export default function AIAssistantPage() {
 
       if (data?.response) {
         setMessages(prev => [...prev, { role: 'model', content: data.response }]);
+      } else {
+        throw new Error('No response received from AI');
       }
     } catch (error) {
       console.error('Error calling AI:', error);
       toast.error('Failed to get AI response. Please try again.');
+      setMessages(prev => prev.slice(0, -1));
     } finally {
       setLoading(false);
       setStreaming(false);

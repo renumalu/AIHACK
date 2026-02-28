@@ -48,7 +48,10 @@
 - Risk score calculated based on pending tasks, missed deadlines, and deadline density
 - Fixed sidebar text visibility by adding explicit text-sidebar-foreground color
 - AI Assistant uses Medo API (Gemini 2.5 Flash) with streaming responses
-- Edge Function handles SSE streaming and returns complete response
+- Edge Function properly handles SSE streaming with improved parsing logic
+- Added system prompt to ensure AI gives clean responses without code artifacts
 - Using react-markdown for rendering AI responses
+- Improved buffer handling in Edge Function to prevent response corruption
+- Added conversation context management for better AI responses
 - All lint errors fixed successfully
 - Application ready for use
