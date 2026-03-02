@@ -1,6 +1,8 @@
-# Welcome to Your Miaoda Project
-Miaoda Application Link URL
-    URL:https://medo.dev/projects/app-9xp25u4ctp1d
+# DEADLINE RADAR AI
+
+DEADLINE RADAR AI App Link:
+
+ URL:https://app-9xp25u4ctp1d.appmedo.com
 
 # Welcome to Your Miaoda Project
 
